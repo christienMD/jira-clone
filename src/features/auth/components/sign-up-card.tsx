@@ -1,7 +1,7 @@
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import z from "zod";
+import { z } from "zod";
 
 import {
   Form,
@@ -22,18 +22,15 @@ import DottedSeparator from "@/components/DottedSeparator";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { registerSchema } from "../schemas";
+import { useRegister } from "../api/useRegister";
 
-const formSchema = z.object({
-  name: z.string().trim().min(3, "Name must be at least 3 characters"),
-  email: z.string().email(),
-  password: z.string().min(8, "Password must have a minimum of 8 characters"),
-});
-
-type FormData = z.infer<typeof formSchema>;
+type FormData = z.infer<typeof registerSchema>;
 
 const SignUpCard = () => {
+  const { mutate } = useRegister();
   const form = useForm<FormData>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(registerSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -42,7 +39,7 @@ const SignUpCard = () => {
   });
 
   const onSubmit = (values: FormData) => {
-    console.log(values);
+    mutate({ json: values });
   };
 
   return (
