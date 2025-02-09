@@ -8,7 +8,7 @@ export default async function Home() {
   if (!user) redirect("/sign-in");
 
   return (
-    <div className="flex gap-4 p-10">
+    <div className="">
       <UserButton />
     </div>
   );
