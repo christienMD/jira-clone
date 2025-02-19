@@ -3,10 +3,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
-import { createWorkspaceSchema } from "../schemas";
+import Image from "next/image";
+import { ImageIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { z } from "zod";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import DottedSeparator from "@/components/DottedSeparator";
 import {
   Form,
   FormControl,
@@ -17,10 +19,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useCreateWorkspace } from "../api/useCreateWorkspace";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import Image from "next/image";
-import { ImageIcon } from "lucide-react";
+import DottedSeparator from "@/components/DottedSeparator";
+
+
+import { createWorkspaceSchema } from "../schemas";
+import { useCreateWorkspace } from "../api/useCreateWorkspace";
 
 interface Props {
   onCancel?: () => void;
@@ -29,6 +33,7 @@ interface Props {
 type FormData = z.infer<typeof createWorkspaceSchema>;
 
 const CreateWorkSpaceForm = ({ onCancel }: Props) => {
+  const router = useRouter()
   const { mutate, isPending } = useCreateWorkspace();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -48,8 +53,10 @@ const CreateWorkSpaceForm = ({ onCancel }: Props) => {
     mutate(
       { form: finalValues },
       {
-        onSuccess: () => {
+        onSuccess: ({data}) => {
           form.reset();
+          // onCancel?.();
+          router.push(`/workspaces/${data.$id}`);
         },
       }
     );
@@ -69,7 +76,7 @@ const CreateWorkSpaceForm = ({ onCancel }: Props) => {
           Create a new workspace
         </CardTitle>
       </CardHeader>
-      <div className="py-7">
+      <div className="px-7">
         <DottedSeparator />
       </div>
       <CardContent className="p-7">
