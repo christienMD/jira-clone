@@ -22,9 +22,9 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import DottedSeparator from "@/components/DottedSeparator";
 
-
 import { createWorkspaceSchema } from "../schemas";
 import { useCreateWorkspace } from "../api/useCreateWorkspace";
+import { cn } from "@/lib/utils";
 
 interface Props {
   onCancel?: () => void;
@@ -33,7 +33,7 @@ interface Props {
 type FormData = z.infer<typeof createWorkspaceSchema>;
 
 const CreateWorkSpaceForm = ({ onCancel }: Props) => {
-  const router = useRouter()
+  const router = useRouter();
   const { mutate, isPending } = useCreateWorkspace();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -53,7 +53,7 @@ const CreateWorkSpaceForm = ({ onCancel }: Props) => {
     mutate(
       { form: finalValues },
       {
-        onSuccess: ({data}) => {
+        onSuccess: ({ data }) => {
           form.reset();
           // onCancel?.();
           router.push(`/workspaces/${data.$id}`);
@@ -161,7 +161,7 @@ const CreateWorkSpaceForm = ({ onCancel }: Props) => {
                   variant="secondary"
                   onClick={onCancel}
                   disabled={isPending}
-                  className="w-full sm:w-auto"
+                  className={cn("w-full sm:w-auto", !onCancel && "invisible")}
                 >
                   Cancel
                 </Button>
