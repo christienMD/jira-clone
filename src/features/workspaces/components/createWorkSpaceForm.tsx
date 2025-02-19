@@ -69,7 +69,7 @@ const CreateWorkSpaceForm = ({ onCancel }: Props) => {
           Create a new workspace
         </CardTitle>
       </CardHeader>
-      <div className="px-7">
+      <div className="py-7">
         <DottedSeparator />
       </div>
       <CardContent className="p-7">
@@ -146,19 +146,29 @@ const CreateWorkSpaceForm = ({ onCancel }: Props) => {
               />
             </div>
             <DottedSeparator className="py-7" />
-            <div className="flex items-center justify-between">
-              <Button
-                type="button"
-                size="lg"
-                variant="secondary"
-                onClick={onCancel}
-                disabled={isPending}
-              >
-                Cancel
-              </Button>
-              <Button disabled={isPending} type="submit" size="lg">
-                Create Workspace
-              </Button>
+            <div className="flex flex-col-reverse sm:flex-row items-center justify-between gap-4 sm:gap-2 w-full">
+              <div className="w-full sm:w-fit">
+                <Button
+                  type="button"
+                  size="lg"
+                  variant="secondary"
+                  onClick={onCancel}
+                  disabled={isPending}
+                  className="w-full sm:w-auto"
+                >
+                  Cancel
+                </Button>
+              </div>
+              <div className="w-full sm:w-fit">
+                <Button
+                  className="w-full sm:w-auto"
+                  disabled={isPending}
+                  type="submit"
+                  size="lg"
+                >
+                  Create Workspace
+                </Button>
+              </div>
             </div>
           </form>
         </Form>

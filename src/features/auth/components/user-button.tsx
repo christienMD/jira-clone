@@ -30,9 +30,19 @@ const UserButton = () => {
 
   const { name, email } = user;
 
-  const avatarFallback = name
-    ? name.charAt(0).toUpperCase()
-    : email.charAt(0).toUpperCase() ?? "U";
+  const getAvatarFallback = () => {
+    if (name && name.length > 0) {
+      return name.charAt(0).toUpperCase();
+    }
+    if (email && email.length > 0) {
+      return email.charAt(0).toUpperCase();
+    }
+    return "U";
+  };
+
+  const avatarFallback = getAvatarFallback();
+
+
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger className="outline-none relative">
