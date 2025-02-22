@@ -286,7 +286,7 @@ const EditWorkSpaceForm = ({ onCancel, initialValues }: Props) => {
             </p>
             <div className="mt-4">
               <div className="flex items-center gap-x-2">
-                <Input disabled value={fullInviteLink} />
+                <Input className="cursor-text" disabled value={fullInviteLink} />
                 <Button
                   onClick={handleCopyInviteLink}
                   variant="secondary"
