@@ -12,7 +12,7 @@ import {
   WORKSPACES_ID,
 } from "@/config";
 import { MemberRole } from "@/features/members/types";
-import { generateInvalideCode } from "@/lib/utils";
+import { generateInviteeCode } from "@/lib/utils";
 import { getMember } from "@/features/members/utils";
 
 const app = new Hono()
@@ -75,7 +75,7 @@ const app = new Hono()
           name,
           userId: user.$id,
           imageUrl: uploadedImageUrl,
-          inviteCode: generateInvalideCode(6),
+          inviteCode: generateInviteeCode(6),
         }
       );
 
@@ -163,6 +163,28 @@ const app = new Hono()
     await databases.deleteDocument(DATABASE_ID, WORKSPACES_ID, workspaceId);
 
     return c.json({ data: { $id: workspaceId } });
+  })
+  .post("/:workspaceId/reset-invite-code", sessionMiddleware, async (c) => {
+    const databases = c.get("databases");
+    const user = c.get("user");
+
+    const { workspaceId } = c.req.param();
+
+    const member = await getMember({
+      databases,
+      workspaceId,
+      userId: user.$id,
+    });
+
+    if (!member || member.role !== MemberRole.ADMIN) {
+      return c.json({ error: "Unauthorized" }, 401);
+    }
+
+    const workspace = await databases.updateDocument(DATABASE_ID, WORKSPACES_ID, workspaceId, {
+      inviteCode: generateInviteeCode(10),
+    });
+
+    return c.json({ data: { $id: workspace } });
   });
 
 export default app;
