@@ -22,23 +22,25 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import DottedSeparator from "@/components/DottedSeparator";
 
-import { createWorkspaceSchema } from "../schemas";
-import { useCreateWorkspace } from "../api/useCreateWorkspace";
+import { useCreateProject } from "../api/useCreateProject";
 import { cn } from "@/lib/utils";
+import { createProjectSchema } from "../schema";
+import useWorkSpaceId from "@/features/workspaces/hooks/useWorkSpaceId";
 
 interface Props {
   onCancel?: () => void;
 }
 
-type FormData = z.infer<typeof createWorkspaceSchema>;
+type FormData = z.infer<typeof createProjectSchema>;
 
-const CreateWorkSpaceForm = ({ onCancel }: Props) => {
+const CreateProjectForm = ({ onCancel }: Props) => {
+  const workspaceId = useWorkSpaceId()
   const router = useRouter();
-  const { mutate, isPending } = useCreateWorkspace();
+  const { mutate, isPending } = useCreateProject();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const form = useForm<FormData>({
-    resolver: zodResolver(createWorkspaceSchema),
+    resolver: zodResolver(createProjectSchema.omit({workspaceId: true})),
     defaultValues: {
       name: "",
     },
@@ -47,6 +49,7 @@ const CreateWorkSpaceForm = ({ onCancel }: Props) => {
   const onSubmit = (values: FormData) => {
     const finalValues = {
       ...values,
+      workspaceId,
       image: values.image instanceof File ? values.image : "",
     };
 
@@ -55,7 +58,7 @@ const CreateWorkSpaceForm = ({ onCancel }: Props) => {
       {
         onSuccess: ({ data }) => {
           form.reset();
-          router.push(`/workspaces/${data.$id}`);
+          // ;
         },
       }
     );
@@ -72,7 +75,7 @@ const CreateWorkSpaceForm = ({ onCancel }: Props) => {
     <Card className="w-full h-full border-none shadow-none">
       <CardHeader className="flex p-7">
         <CardTitle className="text-xl font-bold">
-          Create a new workspace
+          Create a new project
         </CardTitle>
       </CardHeader>
       <div className="px-7">
@@ -87,9 +90,9 @@ const CreateWorkSpaceForm = ({ onCancel }: Props) => {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Workspace Name</FormLabel>
+                    <FormLabel>Project Name</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="Etnter workspace name" />
+                      <Input {...field} placeholder="Etnter project name" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -124,7 +127,7 @@ const CreateWorkSpaceForm = ({ onCancel }: Props) => {
                       )}
 
                       <div className="flex flex-col">
-                        <p className="text-sm">Workspace Icon</p>
+                        <p className="text-sm">Project Icon</p>
                         <p className="text-sm text-muted-foreground">
                           JPG , PNG , SVG , or JPEG, max 1mb
                         </p>
@@ -189,7 +192,7 @@ const CreateWorkSpaceForm = ({ onCancel }: Props) => {
                   type="submit"
                   size="lg"
                 >
-                  Create Workspace
+                  Create Project
                 </Button>
               </div>
             </div>
@@ -200,4 +203,4 @@ const CreateWorkSpaceForm = ({ onCancel }: Props) => {
   );
 };
 
-export default CreateWorkSpaceForm;
+export default CreateProjectForm;
