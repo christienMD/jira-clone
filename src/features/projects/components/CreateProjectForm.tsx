@@ -24,7 +24,7 @@ import DottedSeparator from "@/components/DottedSeparator";
 
 import { useCreateProject } from "../api/useCreateProject";
 import { cn } from "@/lib/utils";
-import { createProjectSchema } from "../schema";
+import { createProjectSchema } from "../schemas";
 import useWorkSpaceId from "@/features/workspaces/hooks/useWorkSpaceId";
 
 interface Props {
@@ -34,13 +34,13 @@ interface Props {
 type FormData = z.infer<typeof createProjectSchema>;
 
 const CreateProjectForm = ({ onCancel }: Props) => {
-  const workspaceId = useWorkSpaceId()
+  const workspaceId = useWorkSpaceId();
   const router = useRouter();
   const { mutate, isPending } = useCreateProject();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const form = useForm<FormData>({
-    resolver: zodResolver(createProjectSchema.omit({workspaceId: true})),
+    resolver: zodResolver(createProjectSchema.omit({ workspaceId: true })),
     defaultValues: {
       name: "",
     },
@@ -58,7 +58,7 @@ const CreateProjectForm = ({ onCancel }: Props) => {
       {
         onSuccess: ({ data }) => {
           form.reset();
-          // ;
+          router.push(`/workspaces/${workspaceId}/projects/${data.$id}`);
         },
       }
     );

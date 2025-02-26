@@ -8,7 +8,6 @@ interface Props {
 }
 
 export const getProject = async ({ projectId }: Props) => {
-  throw new Error('Testing error')
     const { account, databases } = await createSessionClient();
 
   const user = await account.get();
