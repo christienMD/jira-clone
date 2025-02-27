@@ -6,22 +6,39 @@ interface Props {
   workspaceId: string;
   projectId?: string | null;
   status?: string | null;
+  search?: string | null;
   assigneeId?: string | null;
-  dueDate?: string | null
+  dueDate?: string | null;
 }
 
 export const useGetTasks = ({
-   workspaceId ,
-   assigneeId,
-   dueDate,
-   projectId, 
-   status
-  }: Props) => {
+  workspaceId,
+  assigneeId,
+  dueDate,
+  projectId,
+  status,
+  search,
+}: Props) => {
   const query = useQuery({
-    queryKey: ["tasks", workspaceId],
+    queryKey: [
+      "tasks",
+      workspaceId,
+      assigneeId,
+      dueDate,
+      projectId,
+      status,
+      search,
+    ],
     queryFn: async () => {
       const response = await client.api.tasks.$get({
-        query: { workspaceId },
+        query: {
+          workspaceId,
+          assigneeId: assigneeId ?? undefined,
+          projectId: projectId ?? undefined,
+          dueDate: dueDate ?? undefined,
+          status: status ?? undefined,
+          search: search ?? undefined,
+        },
       });
 
       if (!response.ok) {
