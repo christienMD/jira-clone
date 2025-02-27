@@ -1,22 +1,21 @@
+import { DATABASE_ID, MEMBERS_ID, PROJECTS_ID, TASKS_ID } from "@/config";
+import { getMember } from "@/features/members/utils";
+import { Project } from "@/features/projects/types";
+import { createAdminClient } from "@/lib/appwrite";
 import { sessionMiddleware } from "@/lib/session-middleware";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
-import { createTaskSchema } from "../schemas";
-import { getMember } from "@/features/members/utils";
-import { DATABASE_ID, MEMBERS_ID, PROJECTS_ID, TASKS_ID } from "@/config";
 import { ID, Query } from "node-appwrite";
 import { z } from "zod";
+import { createTaskSchema } from "../schemas";
 import { TaskStatus } from "../types";
-import { createAdminClient } from "@/lib/appwrite";
-import { error } from "console";
-import { Project } from "@/features/projects/types";
 
 const app = new Hono()
   .get(
     "/",
     sessionMiddleware,
     zValidator(
-      "json",
+      "query",
       z.object({
         workspaceId: z.string(),
         projectId: z.string().nullish(),
@@ -32,7 +31,7 @@ const app = new Hono()
       const user = c.get("user");
 
       const { workspaceId, projectId, search, status, dueDate, assigneeid } =
-        c.req.valid("json");
+        c.req.valid("query");
 
       const member = await getMember({
         databases,

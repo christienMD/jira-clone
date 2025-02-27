@@ -4,9 +4,19 @@ import { client } from "@/lib/rpc";
 
 interface Props {
   workspaceId: string;
+  projectId?: string | null;
+  status?: string | null;
+  assigneeId?: string | null;
+  dueDate?: string | null
 }
 
-export const useGetTasks = ({ workspaceId }: Props) => {
+export const useGetTasks = ({
+   workspaceId ,
+   assigneeId,
+   dueDate,
+   projectId, 
+   status
+  }: Props) => {
   const query = useQuery({
     queryKey: ["tasks", workspaceId],
     queryFn: async () => {
