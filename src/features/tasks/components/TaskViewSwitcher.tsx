@@ -13,6 +13,8 @@ import { useTasFilters } from "../hooks/useTaskFilters";
 import { DataTable } from "./DataTable";
 import { columns } from "./Columns";
 import DataKanban from "./DataKanban";
+import { useCallback } from "react";
+import { TaskStatus } from "../types";
 
 const TaskViewSwitcher = () => {
   const [{ status, assigneeId, projectId, dueDate }] = useTasFilters();
@@ -31,6 +33,12 @@ const TaskViewSwitcher = () => {
     status,
     dueDate,
   });
+
+  const onkanbanChange = useCallback((
+    tasks: {$id: string , status: TaskStatus , position: number}[]
+  ) => {
+     console.log('tasks: ', tasks)
+  }, [])
 
   return (
     <Tabs
@@ -71,7 +79,7 @@ const TaskViewSwitcher = () => {
               <DataTable columns={columns} data={tasks?.documents ?? []} />
             </TabsContent>
             <TabsContent value="kanban" className="mt-0">
-              <DataKanban data={tasks?.documents ?? []} />
+              <DataKanban onChange={onkanbanChange} data={tasks?.documents ?? []} />
             </TabsContent>
             <TabsContent value="calender" className="mt-0">
               Data calender
