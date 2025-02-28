@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import CreateProjectModal from "@/features/projects/components/CreateProjectModal";
 import { CreateTaskModal } from "@/features/tasks/components/createTaskModal";
-import { EditTaskModal } from "@/features/tasks/components/editTaskModal";
+import { EditTaskModal } from "@/features/tasks/components/EditTaskModal";
 import CreateWorkspaceModal from "@/features/workspaces/components/CreateWorkspaceModal";
 
 interface DashboardLayoutProps {

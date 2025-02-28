@@ -2,7 +2,7 @@
 
 import ResponsiveModal from "@/components/ResponsiveModal";
 import useEditTaskModal from "../hooks/useEditTaskModal";
-import EditTaskFormWrapper from "./editTaskFormWrapper";
+import EditTaskFormWrapper from "./EditTaskFormWrapper";
 
 export const EditTaskModal = () => {
   const { taskId , setTaskId , close} = useEditTaskModal();
