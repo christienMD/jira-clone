@@ -18,7 +18,13 @@ import { TaskStatus } from "../types";
 import { useBulkUpdateTask } from "../api/useBulkUpdateTask";
 import DataCalendar from "./DataCalendar";
 
-const TaskViewSwitcher = () => {
+
+interface Props {
+  hideProjectFilter?:boolean
+}
+
+
+const TaskViewSwitcher = ({hideProjectFilter}:Props) => {
   const [{ status, assigneeId, projectId, dueDate }] = useTasFilters();
 
   const [view, setView] = useQueryState("task-view", {
@@ -74,7 +80,7 @@ const TaskViewSwitcher = () => {
         </div>
         <DottedSeparator className="my-4" />
         {/* Add filters */}
-        <DataFilters />
+        <DataFilters hideProjectFiler={hideProjectFilter} />
         <DottedSeparator className="my-4" />
         {isLoadingTasks ? (
           <div className="w-full border rounded-lg h-[200px] flex flex-col items-center justify-center">
