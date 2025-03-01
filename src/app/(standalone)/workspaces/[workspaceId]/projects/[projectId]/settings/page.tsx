@@ -1,31 +1,13 @@
 import { getCurrent } from "@/features/auth/queries";
-import EditProjectForm from "@/features/projects/components/EditProjectForm";
-import { getProject } from "@/features/projects/queries";
 import { redirect } from "next/navigation";
+import ProjectIdSettingsClient from "./Client";
 
 
-interface Props {
-    params: { projectId: string };
-  }
+const ProjectIdSettingsPage = async () => {
+  const user = await getCurrent();
+  if (!user) redirect("/sign-in");
 
-const ProjectIdSettingsPage = async({params: {projectId}}:Props) => {
-     const user = await getCurrent();
-      if (!user) redirect("/sign-in");
-    
-      const initialValues = await getProject({
-        projectId,
-      });
-    
-      if (!initialValues) {
-        throw new Error("Project not found");
-      }
+  return <ProjectIdSettingsClient />;
+};
 
-
-  return (
-    <div className="w-full lg:max-w-lg">
-    <EditProjectForm initialValues={initialValues} />
-  </div>
-  )
-}
-
-export default ProjectIdSettingsPage
+export default ProjectIdSettingsPage;

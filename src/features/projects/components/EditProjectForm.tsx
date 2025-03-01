@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowLeftIcon, CopyIcon, ImageIcon } from "lucide-react";
+import { ArrowLeftIcon, ImageIcon } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
@@ -22,13 +22,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-import { cn } from "@/lib/utils";
-import { Project } from "../types";
 import useConfirm from "@/hooks/useConfirm";
-import { toast } from "sonner";
-import { updateProjectSchema } from "../schemas";
-import { useUpdateProject } from "../api/useUpdateProject";
+import { cn } from "@/lib/utils";
 import { useDeleteProject } from "../api/useDeleteProject";
+import { useUpdateProject } from "../api/useUpdateProject";
+import { updateProjectSchema } from "../schemas";
+import { Project } from "../types";
 
 interface Props {
   onCancel?: () => void;
@@ -43,14 +42,12 @@ const EditProjectForm = ({ onCancel, initialValues }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { mutate: deleteProject, isPending: isDeletingProject } =
     useDeleteProject();
-  
 
   const [DeleteDialog, confirmDelete] = useConfirm(
     "Delete Project",
     "This action cannot be undone.",
     "destructive"
   );
-
 
   const form = useForm<FormData>({
     resolver: zodResolver(updateProjectSchema),
@@ -77,7 +74,6 @@ const EditProjectForm = ({ onCancel, initialValues }: Props) => {
     );
   };
 
-
   const onSubmit = (values: FormData) => {
     const finalValues = {
       ...values,
@@ -88,12 +84,10 @@ const EditProjectForm = ({ onCancel, initialValues }: Props) => {
       { form: finalValues, param: { projectId: initialValues.$id } },
       {
         onSuccess: ({ data }) => {
-            form.reset({
-              ...data,
-              image: data.imageUrl ?? "",
-            });
-            router.refresh();
-          // router.push(`/workspaces/${data.$id}`);
+          form.reset({
+            ...data,
+            image: data.imageUrl ?? "",
+          });
         },
       }
     );
@@ -106,8 +100,6 @@ const EditProjectForm = ({ onCancel, initialValues }: Props) => {
     }
   };
 
-
-
   return (
     <div className="flex flex-col gap-y-4">
       <DeleteDialog />
@@ -119,7 +111,10 @@ const EditProjectForm = ({ onCancel, initialValues }: Props) => {
             onClick={
               onCancel
                 ? onCancel
-                : () => router.push(`/workspaces/${initialValues.workspaceId}/projects/${initialValues.$id}`)
+                : () =>
+                    router.push(
+                      `/workspaces/${initialValues.workspaceId}/projects/${initialValues.$id}`
+                    )
             }
           >
             Back
@@ -252,15 +247,13 @@ const EditProjectForm = ({ onCancel, initialValues }: Props) => {
         </CardContent>
       </Card>
 
-     
-
       <Card className="w-full h-full border-none shadow-none">
         <CardContent className="p-7">
           <div className="flex flex-col">
             <h3 className="font-bold">Danger Zone</h3>
             <p className="text-sm text-muted-foreground">
-              Deleting a project is irreversable and will remove all
-              associated data.
+              Deleting a project is irreversable and will remove all associated
+              data.
             </p>
 
             <DottedSeparator className="py-7" />

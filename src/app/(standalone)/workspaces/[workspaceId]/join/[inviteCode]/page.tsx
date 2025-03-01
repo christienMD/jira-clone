@@ -1,29 +1,12 @@
 import { getCurrent } from "@/features/auth/queries";
-import JoinWorkspaceForm from "@/features/workspaces/components/JoinWorkspaceForm";
-import { getWorkspaceInfo } from "@/features/workspaces/queries";
 import { redirect } from "next/navigation";
+import WorkspaceIdJoinClient from "./Client";
 
-interface Props {
-  params: { workspaceId: string };
-}
-
-const WorkspaceIdJoinPage = async ({ params: { workspaceId } }: Props) => {
+const WorkspaceIdJoinPage = async () => {
   const user = await getCurrent();
   if (!user) redirect("/sign-in");
 
-  const initialValues = await getWorkspaceInfo({
-    workspaceId,
-  });
-
-  if (!initialValues) {
-    redirect("/");
-  }
-
-  return (
-    <div className="w-full lg:max-w-xl">
-      <JoinWorkspaceForm initialValues={initialValues} />
-    </div>
-  );
+  return <WorkspaceIdJoinClient />;
 };
 
 export default WorkspaceIdJoinPage;

@@ -5,17 +5,23 @@ import { client } from "@/lib/rpc";
 import { InferRequestType, InferResponseType } from "hono";
 import { useRouter } from "next/navigation";
 
-type ResponseType = InferResponseType<(typeof client.api.workspaces[':workspaceId'])["$patch"] , 200>;
-type RequestType = InferRequestType<(typeof client.api.workspaces[':workspaceId'])["$patch"]>;
+type ResponseType = InferResponseType<
+  (typeof client.api.workspaces)[":workspaceId"]["$patch"],
+  200
+>;
+type RequestType = InferRequestType<
+  (typeof client.api.workspaces)[":workspaceId"]["$patch"]
+>;
 
 export const useUpdateWorkspace = () => {
-  const router = useRouter()
   const queryClient = useQueryClient();
 
-
   const mutation = useMutation<ResponseType, Error, RequestType>({
-    mutationFn: async ({ form , param }) => {
-      const response = await client.api.workspaces[':workspaceId']["$patch"]({ form , param });
+    mutationFn: async ({ form, param }) => {
+      const response = await client.api.workspaces[":workspaceId"]["$patch"]({
+        form,
+        param,
+      });
 
       if (!response.ok) {
         throw new Error("Failed to updated workspace");
@@ -24,11 +30,10 @@ export const useUpdateWorkspace = () => {
       return await response.json();
     },
 
-    onSuccess: async ({data}) => {
+    onSuccess: async ({ data }) => {
       toast.success("Workspace updated successfully!");
-      router.refresh()
       queryClient.invalidateQueries({ queryKey: ["workspaces"] });
-      queryClient.invalidateQueries({ queryKey: ["workspaces" , data.$id] });
+      queryClient.invalidateQueries({ queryKey: ["workspace", data.$id] });
     },
     onError: () => {
       toast.error("Failed to update workspace");

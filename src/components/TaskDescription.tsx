@@ -17,10 +17,17 @@ const TaskDescription = ({ task }: Props) => {
   const { mutate, isPending } = useUpdateTask();
 
   const handleSave = () => {
-    mutate({
-      json: { description: value },
-      param: { taskId: task.$id },
-    });
+    mutate(
+      {
+        json: { description: value },
+        param: { taskId: task.$id },
+      },
+      {
+        onSuccess: () => {
+          setisEditing(false);
+        },
+      }
+    );
   };
 
   return (
