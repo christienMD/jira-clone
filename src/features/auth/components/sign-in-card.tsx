@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Card, CardTitle, CardHeader, CardContent } from "@/components/ui/card";
+import { signUpWithGithub, signUpWithGoogle } from "@/lib/oauth";
 import DottedSeparator from "@/components/DottedSeparator";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -25,7 +26,7 @@ import { useLogin } from "../api/useLogin";
 type FormData = z.infer<typeof loginSchema>;
 
 const SignInCard = () => {
-  const { mutate , isPending } = useLogin();
+  const { mutate, isPending } = useLogin();
 
   const form = useForm<FormData>({
     resolver: zodResolver(loginSchema),
@@ -95,6 +96,7 @@ const SignInCard = () => {
       </div>
       <CardContent className="p-7 flex flex-col gap-y-4">
         <Button
+          onClick={() => signUpWithGoogle()}
           disabled={isPending}
           variant="secondary"
           size="lg"
@@ -104,6 +106,7 @@ const SignInCard = () => {
           Login with Google
         </Button>
         <Button
+          onClick={() => signUpWithGithub()}
           disabled={isPending}
           variant="secondary"
           size="lg"
