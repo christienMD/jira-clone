@@ -1,6 +1,6 @@
 # Jira Clone - By Mesueh Christien
 
-A lightweight Jira-inspired task management app built with modern web technologies. Manage your projects, track tasks, and collaborate with your team - all in one place.
+A lightweight Jira-inspired task management app built with modern web technologies. Manage your projects, track tasks, and collaborate with your team - all in one place. The system features real-time synchronization, responsive layouts, and optimized drag-and-drop functionality built on custom React hooks. The integration with Appwrite's backend services demonstrates proficiency in modern authentication flows and database design. With performance-optimized rendering and careful attention to accessibility standards, This Jira-Clon represents a comprehensive showcase of full-stack development capabilities focused on delivering exceptional user experiences.
 
 ## Tech Stack
 
@@ -9,7 +9,7 @@ A lightweight Jira-inspired task management app built with modern web technologi
 - **Tailwind CSS**: Utility-first CSS framework
 - **Shadcn UI**: Accessible UI components
 - **Appwrite**: Backend as a service for database and authentication
-- **Hono**: Lightweight, ultrafast web framework
+- **Hono**: Lightweight, ultrafast web framework for building API routes and server-side functions with minimal overhead, improving application performance
 - **Zod**: TypeScript-first schema validation
 - **React Hook Form**: Form validation and handling
 - **React Query**: Data fetching and state management
@@ -18,8 +18,8 @@ A lightweight Jira-inspired task management app built with modern web technologi
 
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/taskflow.git
-cd taskflow
+git clone https://github.com/christienMD/jira-clone.git
+cd jira-clone
 ```
 
 2. Install dependencies
