@@ -1,17 +1,17 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import DottedSeparator from "@/components/DottedSeparator";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import DottedSeparator from "@/components/DottedSeparator";
 
-import { useLogout } from "../api/useLogout";
-import { useCurrent } from "../api/useCurrent";
 import { Loader, LogOut } from "lucide-react";
+import { useCurrent } from "../api/useCurrent";
+import { useLogout } from "../api/useLogout";
 
 const UserButton = () => {
   const { data: user, isLoading } = useCurrent();

@@ -56,7 +56,7 @@ const CreateTaskForm = ({ onCancel, projectOptions, memberOptions }: Props) => {
     mutate(
       { json: { ...values, workspaceId } },
       {
-        onSuccess: ({ data }) => {
+        onSuccess: () => {
           form.reset();
           onCancel?.();
         },

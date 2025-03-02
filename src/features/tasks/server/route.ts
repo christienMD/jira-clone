@@ -160,15 +160,8 @@ const app = new Hono()
     async (c) => {
       const user = c.get("user");
       const databases = c.get("databases");
-      const {
-        name,
-        status,
-        workspaceId,
-        projectId,
-        assigneeId,
-        dueDate,
-        description,
-      } = c.req.valid("json");
+      const { name, status, workspaceId, projectId, assigneeId, dueDate } =
+        c.req.valid("json");
 
       const member = await getMember({
         databases,
@@ -355,23 +348,21 @@ const app = new Hono()
       });
 
       if (!member) {
-        return c.json({error: 'Uauthorized'}, 401)
+        return c.json({ error: "Uauthorized" }, 401);
       }
 
       const updatedTasks = await Promise.all(
         tasks.map(async (task) => {
-          const {$id , status , position} = task;
+          const { $id, status, position } = task;
 
-          return databases.updateDocument<Task>(
-            DATABASE_ID,
-            TASKS_ID,
-            $id, 
-            {status , position}
-          )
+          return databases.updateDocument<Task>(DATABASE_ID, TASKS_ID, $id, {
+            status,
+            position,
+          });
         })
-      )
+      );
 
-      return c.json({data: updatedTasks})
+      return c.json({ data: updatedTasks });
     }
   );
 

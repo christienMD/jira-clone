@@ -6,10 +6,11 @@ import MemberAvatar from "@/features/members/components/MemberAvatar";
 import ProjectAvatar from "@/features/projects/components/ProjectAvatar";
 import useWorkSpaceId from "@/features/workspaces/hooks/useWorkSpaceId";
 import { useRouter } from "next/navigation";
+import { Member } from "@/features/members/types";
 
 interface Props {
   title: string;
-  assignee: any;
+  assignee: Member;
   project: Project;
   status: TaskStatus;
   id: string;

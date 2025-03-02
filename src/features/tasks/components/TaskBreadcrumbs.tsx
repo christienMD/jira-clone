@@ -1,14 +1,13 @@
-import { Project } from "@/features/projects/types";
-import React from "react";
-import { Task } from "../types";
-import ProjectAvatar from "@/features/projects/components/ProjectAvatar";
-import useWorkSpaceId from "@/features/workspaces/hooks/useWorkSpaceId";
-import Link from "next/link";
-import { ChevronRightIcon, Router, TrashIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useDeleteTask } from "../api/useDeleteTask";
+import ProjectAvatar from "@/features/projects/components/ProjectAvatar";
+import { Project } from "@/features/projects/types";
+import useWorkSpaceId from "@/features/workspaces/hooks/useWorkSpaceId";
 import useConfirm from "@/hooks/useConfirm";
+import { ChevronRightIcon, TrashIcon } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useDeleteTask } from "../api/useDeleteTask";
+import { Task } from "../types";
 
 interface Props {
   project: Project;

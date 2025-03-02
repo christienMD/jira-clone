@@ -262,7 +262,7 @@ const EditProjectForm = ({ onCancel, initialValues }: Props) => {
               size="sm"
               variant="destructive"
               type="button"
-              disabled={isPending}
+              disabled={isPending || isDeletingProject}
               onClick={handleDelete}
               className="mt-6 w-fit ml-auto"
             >

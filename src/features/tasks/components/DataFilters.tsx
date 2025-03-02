@@ -40,7 +40,7 @@ const DataFilters = ({ hideProjectFiler }: Props) => {
     label: member.name,
   }));
 
-  const [{ status, search, assigneeId, projectId, dueDate }, setFilters] =
+  const [{ status, assigneeId, projectId, dueDate }, setFilters] =
     useTasFilters();
 
   const onStatusChange = (value: string) => {

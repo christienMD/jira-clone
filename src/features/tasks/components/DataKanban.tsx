@@ -160,9 +160,9 @@ const DataKanban = ({ data , onChange}: Props) => {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="flex overflow-x-auto">
-        {boards.map((board) => {
+        {boards.map((board , index) => {
           return (
-            <div className="flex-1 mx-2 bg-muted p-1.5 rounded-md min-w-[200px]">
+            <div key={index} className="flex-1 mx-2 bg-muted p-1.5 rounded-md min-w-[200px]">
               <KanbanColumnHeader
                 board={board}
                 taskCount={tasks[board].length}

@@ -17,9 +17,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-import useWorkSpaceId from "@/features/workspaces/hooks/useWorkSpaceId";
-import { cn } from "@/lib/utils";
-import { createTaskSchema } from "../schemas";
 import DatePicker from "@/components/DatePicker";
 import {
   Select,
@@ -29,9 +26,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import MemberAvatar from "@/features/members/components/MemberAvatar";
-import { Task, TaskStatus } from "../types";
 import ProjectAvatar from "@/features/projects/components/ProjectAvatar";
+import { cn } from "@/lib/utils";
 import { useUpdateTask } from "../api/useUpdateTask";
+import { createTaskSchema } from "../schemas";
+import { Task, TaskStatus } from "../types";
 
 interface Props {
   onCancel?: () => void;
@@ -48,7 +47,6 @@ const EditTaskForm = ({
   memberOptions,
   initialValues,
 }: Props) => {
-  const workspaceId = useWorkSpaceId();
   const { mutate, isPending } = useUpdateTask();
 
   const form = useForm<FormData>({
@@ -67,7 +65,7 @@ const EditTaskForm = ({
     mutate(
       {json: values , param: {taskId: initialValues.$id}},
       {
-        onSuccess: ({ data }) => {
+        onSuccess: () => {
           form.reset();
           onCancel?.();
         },

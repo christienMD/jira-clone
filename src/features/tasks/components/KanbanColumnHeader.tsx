@@ -1,15 +1,14 @@
+import { Button } from "@/components/ui/button";
 import { snakeCaseToTitleCase } from "@/lib/utils";
-import { TaskStatus } from "../types";
 import {
   CircleCheckIcon,
   CircleDashedIcon,
-  CircleDotDashed,
   CircleDotIcon,
   CircleIcon,
-  PlusIcon,
+  PlusIcon
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import useCreateTaskModal from "../hooks/useCreateTaskModal";
+import { TaskStatus } from "../types";
 
 interface Props {
   board: TaskStatus;

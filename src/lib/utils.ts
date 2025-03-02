@@ -33,6 +33,7 @@ export const formatDate = (dateString: string | null | undefined): string => {
     // Format: "Wed, Feb 5, 2025 at 11:00 PM"
     return format(date, "EEE, MMM d, yyyy");
   } catch (error) {
+       console.log('format date error: ',error)
     return "Invalid date format";
   }
 };
