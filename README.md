@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Jira Clone - By Mesueh Christien
+
+A lightweight Jira-inspired task management app built with modern web technologies. Manage your projects, track tasks, and collaborate with your team - all in one place.
+
+## Tech Stack
+
+- **Next.js**: 14.2.14
+- **TypeScript**: For type safety and better developer experience
+- **Tailwind CSS**: Utility-first CSS framework
+- **Shadcn UI**: Accessible UI components
+- **Appwrite**: Backend as a service for database and authentication
+- **Hono**: Lightweight, ultrafast web framework
+- **Zod**: TypeScript-first schema validation
+- **React Hook Form**: Form validation and handling
+- **React Query**: Data fetching and state management
 
 ## Getting Started
 
-First, run the development server:
-
+1. Clone the repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/yourusername/taskflow.git
+cd taskflow
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up environment variables by creating a `.env.local` file based on `.env.example`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Run the development server
+```bash
+npm run dev
+```
 
-## Learn More
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-To learn more about Next.js, take a look at the following resources:
+## Environment Variables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Create a `.env.local` file with the following variables:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+NEXT_PUBLIC_APP_URL=http://localhost:3000
 
-## Deploy on Vercel
+NEXT_PUBLIC_APPWRITE_ENDPOINT=https://cloud.appwrite.io/v1
+NEXT_PUBLIC_APPWRITE_PROJECT=your_project_id
+NEXT_PUBLIC_APPWRITE_DATABASE_ID=your_database_id
+NEXT_PUBLIC_APPWRITE_WORKSPACES_ID=your_workspaces_collection_id
+NEXT_PUBLIC_APPWRITE_MEMBERS_ID=your_members_collection_id
+NEXT_PUBLIC_APPWRITE_PROJECTS_ID=your_projects_collection_id
+NEXT_PUBLIC_APPWRITE_TASKS_ID=your_tasks_collection_id
+NEXT_PUBLIC_APPWRITE_IMAGES_BUCKET_ID=your_images_bucket_id
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+NEXT_APPWRITE_KEY=your_appwrite_api_key
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
