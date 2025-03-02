@@ -32,7 +32,7 @@ interface Props {
 
 type FormData = z.infer<typeof createWorkspaceSchema>;
 
-const CreateWorkSpaceForm = ({ onCancel }: Props) => {
+const CreateWorkspaceForm = ({ onCancel }: Props) => {
   const router = useRouter();
   const { mutate, isPending } = useCreateWorkspace();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -200,4 +200,4 @@ const CreateWorkSpaceForm = ({ onCancel }: Props) => {
   );
 };
 
-export default CreateWorkSpaceForm;
+export default CreateWorkspaceForm;
