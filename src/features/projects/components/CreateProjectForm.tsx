@@ -92,7 +92,7 @@ const CreateProjectForm = ({ onCancel }: Props) => {
                   <FormItem>
                     <FormLabel>Project Name</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="Etnter project name" />
+                      <Input {...field} placeholder="Enter project name" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

@@ -84,7 +84,7 @@ const CreateTaskForm = ({ onCancel, projectOptions, memberOptions }: Props) => {
                   <FormItem>
                     <FormLabel>Task Name</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="Etnter task name" />
+                      <Input {...field} placeholder="Enter task name" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

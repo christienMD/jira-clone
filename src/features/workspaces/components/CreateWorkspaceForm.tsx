@@ -89,7 +89,7 @@ const CreateWorkspaceForm = ({ onCancel }: Props) => {
                   <FormItem>
                     <FormLabel>Workspace Name</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="Etnter workspace name" />
+                      <Input {...field} placeholder="Enter workspace name" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
